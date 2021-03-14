@@ -3,6 +3,7 @@ import FileSync from "lowdb/adapters/FileSync";
 
 export class Config {
   ghApiKey: string | null = null;
+  ghUsername: string | null = null;
   editorCommand = "code";
 }
 
