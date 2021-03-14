@@ -1,36 +1,37 @@
-import { Text, Window, hot, View } from "@nodegui/react-nodegui";
+import { Text, Window, hot, View, Button } from "@nodegui/react-nodegui";
 import React from "react";
-import { QIcon } from "@nodegui/nodegui";
+import { QIcon, WindowType } from "@nodegui/nodegui";
 import nodeguiIcon from "../assets/nodegui.jpg";
-import { MemoryRouter } from "react-router";
+import { useHistory } from "react-router";
 import { AppRoutes } from "./appRoutes";
-
-const minSize = { width: 500, height: 520 };
+import { ConfigRepo } from "./config";
+const minSize = { width: 450, height: 720 };
 const winIcon = new QIcon(nodeguiIcon);
-class App extends React.Component {
-  render() {
-    return (
-      <MemoryRouter>
-        <Window
-          windowIcon={winIcon}
-          windowTitle="PRetzel 🥨"
-          minSize={minSize}
-          styleSheet={styleSheet}
-        >
-          <View style={containerStyle}>
-            <Text id="welcome-text">Welcome to NodeGui 🐕</Text>
-            <Text id="step-1">1. Play around</Text>
-            <Text id="step-2">2. Debug</Text>
-            <AppRoutes />
-          </View>
-        </Window>
-      </MemoryRouter>
-    );
-  }
+
+type AppProps = {};
+type AppState = {};
+function App() {
+  const history = useHistory();
+  const config = ConfigRepo.getInstance();
+
+  return (
+    <Window
+      windowIcon={winIcon}
+      windowTitle="PRetzel 🥨"
+      minSize={minSize}
+      styleSheet={styleSheet}
+      windowFlags={{ [WindowType.WindowStaysOnTopHint]: true }}
+    >
+      <View style={containerStyle}>
+        <AppRoutes />
+      </View>
+    </Window>
+  );
 }
 
 const containerStyle = `
-  flex: 1; 
+  flex: 1;
+  padding: 10px;
 `;
 
 const styleSheet = `

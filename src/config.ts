@@ -1,4 +1,4 @@
-import lowdb from "lowdb";
+import lowdb, { LowdbSync } from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
 
 export class Config {
@@ -7,13 +7,18 @@ export class Config {
 }
 
 export class ConfigRepo {
-  private db: lowdb;
-  constructor() {
-    const adapter = new FileSync("config.json");
-    this.db = lowdb(adapter);
-
-    //console.log(Config)
+  private static instance: ConfigRepo;
+  private db: LowdbSync<Config>;
+  private constructor() {
+    this.db = lowdb(new FileSync("config.json"));
     this.db.defaults(new Config()).write();
+  }
+
+  public static getInstance(): ConfigRepo {
+    if (!ConfigRepo.instance) {
+      ConfigRepo.instance = new ConfigRepo();
+    }
+    return ConfigRepo.instance;
   }
 
   set(key: keyof Config, val: string) {

@@ -7,7 +7,7 @@ import { Review } from "./screens/review";
 export function AppRoutes() {
   return (
     <>
-      <Route exact path="/" component={Login} />
+      <Route exact path="/login" component={Login} />
       <Route path="/list" component={List} />
       <Route path="/review" component={Review} />
     </>
