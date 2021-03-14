@@ -9,7 +9,7 @@ import { QLineEditSignals, QPushButtonSignals } from "@nodegui/nodegui";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { ConfigRepo } from "../config";
-const { request } = require("@octokit/request");
+import { request } from "@octokit/request";
 
 export function Login() {
   const [username, setUsername] = useState("");
